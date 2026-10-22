@@ -347,6 +347,107 @@ nav li.sep { width: 1px; height: 20px; background: var(--rule-2); margin: 0 8px;
 .log time { font-family: var(--mono); font-size: 13px; color: var(--accent); }
 .log p { color: var(--ink-2); }
 
+/* ============================================================
+   Sección Amigos / Colaboradores
+   ============================================================ */
+.friends .wrap {
+  display: grid;
+  gap: 32px 48px;
+  grid-template-columns: minmax(0, 4fr) minmax(0, 8fr);
+}
+.friends-grid {
+  display: grid;
+  gap: 24px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+.friend-card {
+  display: grid;
+  gap: 16px;
+  padding: 24px;
+  border: 1px solid var(--rule-2);
+  border-radius: var(--radius);
+  background: var(--panel);
+  transition: border-color var(--dur), background var(--dur);
+}
+.friend-card:hover {
+  border-color: var(--accent-dim);
+  background: color-mix(in srgb, var(--panel) 85%, var(--accent) 5%);
+}
+.friend-avatar {
+  display: inline-flex;
+  width: 64px;
+  height: 64px;
+  color: var(--accent);
+  opacity: 0.8;
+}
+.friend-card h3 {
+  font-size: clamp(20px, 2vw, 24px);
+  margin: 0;
+}
+.friend-role {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent-2);
+  padding: 3px 8px;
+  border: 1px solid var(--accent-2-dim);
+  border-radius: var(--radius);
+}
+.friend-role::before {
+  content: "";
+  width: 5px;
+  height: 5px;
+  border: 1px solid var(--accent-2);
+  border-radius: 50%;
+}
+.friend-desc {
+  color: var(--ink-2);
+  line-height: 1.5;
+  max-width: 44ch;
+}
+.friend-links {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--ink-3);
+}
+.friend-links a {
+  color: var(--ink-2);
+  text-decoration: none;
+  border-bottom: 1px solid var(--rule-2);
+  transition: color var(--dur), border-color var(--dur);
+}
+.friend-links a:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+.friend-sep {
+  color: var(--ink-3);
+  opacity: 0.5;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .friends .wrap {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 700px) {
+  .friends-grid {
+    grid-template-columns: 1fr;
+  }
+  .friend-avatar {
+    width: 56px;
+    height: 56px;
+  }
+}
+
 /* ---------- responsive ---------- */
 @media (max-width: 900px) {
   .hero .wrap { grid-template-columns: 1fr; }
