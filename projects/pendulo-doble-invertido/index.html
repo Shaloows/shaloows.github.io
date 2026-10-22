@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title data-i18n="meta.title">Péndulo doble invertido — Gonzalo Grasso</title>
+<meta name="description" data-i18n-content="meta.desc" content="Diseño y construcción de un péndulo doble invertido: modelado, electrónica, firmware y resultados.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/site.css">
+</head>
+<body>
+<a class="skip" href="#main" data-i18n="skip">Saltar al contenido</a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../../index.html" aria-label="Gonzalo Grasso">
+      <span class="name">Gonzalo Grasso</span>
+      <span class="nick">Rulo</span>
+    </a>
+    <nav aria-label="Principal" data-i18n-aria="nav.label">
+      <ul>
+        <li><a href="../../index.html#proyectos" data-i18n="nav.projects">Proyectos</a></li>
+        <li><a href="../../index.html#sobre-mi" data-i18n="nav.about">Sobre mí</a></li>
+        <li><a href="../../index.html#contacto" data-i18n="nav.contact">Contacto</a></li>
+        <li class="sep" aria-hidden="true"></li>
+        <li>
+          <div class="lang" role="group" aria-label="Idioma" data-i18n-aria="lang.label">
+            <button type="button" data-lang="es" aria-pressed="true" lang="es">ES</button>
+            <button type="button" data-lang="en" aria-pressed="false" lang="en">EN</button>
+          </div>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <section class="proj-hero" aria-labelledby="proj-title">
+    <div class="wrap">
+      <a class="go back" href="../../index.html#proyectos" data-i18n="back">Todos los proyectos</a>
+      <div class="readout">
+        <span class="lbl"><span class="on">CH1</span> · <span data-i18n="ch">Proyecto</span> 01</span>
+        <span class="status on" data-i18n="status">En desarrollo</span>
+      </div>
+      <h1 id="proj-title" data-i18n="title">Péndulo doble invertido</h1>
+      <p class="lede" data-i18n="lede">Un péndulo de dos eslabones montado sobre un carro, que un controlador tiene que mantener en equilibrio apuntando hacia arriba. Es un sistema inestable y subactuado: un buen banco de pruebas para juntar modelado, electrónica y firmware en un solo proyecto.</p>
+
+      <dl class="proj-meta">
+        <div><dt data-i18n="meta.status">Estado</dt><dd data-i18n="meta.status.v">En desarrollo · etapa 1 de 5</dd></div>
+        <div><dt data-i18n="meta.start">Inicio</dt><dd>2026-10</dd></div>
+        <div><dt data-i18n="meta.areas">Áreas</dt><dd>Control · Firmware · PCB</dd></div>
+        <div><dt data-i18n="meta.repo">Repositorio</dt><dd class="muted" data-i18n="meta.repo.v">Próximamente</dd></div>
+      </dl>
+
+      <div class="proj-cover">
+        <div class="ph" role="img" aria-label="Imagen del proyecto (próximamente)" data-i18n-aria="ph">
+          <div class="corner"></div>
+          <div class="ph-txt">
+            <svg viewBox="0 0 56 56" aria-hidden="true">
+              <line x1="28" y1="48" x2="28" y2="30"/>
+              <line x1="28" y1="30" x2="40" y2="12"/>
+              <circle cx="28" cy="30" r="3"/>
+              <circle cx="40" cy="12" r="3"/>
+              <rect x="14" y="48" width="28" height="4"/>
+            </svg>
+            <span class="lbl" data-i18n="ph">Imagen del proyecto (próximamente)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="etapas" aria-labelledby="stages-title">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="stages-title" data-i18n="stages.title">Etapas</h2>
+        <span class="lbl" data-i18n="stages.count">5 etapas · 1 en curso</span>
+      </div>
+
+      <div class="stages">
+
+        <article class="stage" id="objetivo">
+          <div class="stage-head">
+            <span class="lbl">01</span>
+            <h3 data-i18n="s1.title">Objetivo y alcance</h3>
+            <span class="status on" data-i18n="st.active">En curso</span>
+          </div>
+          <div class="stage-body">
+            <p data-i18n-html="s1.p1">El objetivo es <strong>levantar y mantener en equilibrio</strong> un péndulo doble invertido sobre un carro lineal, con electrónica y firmware propios.</p>
+            <p data-i18n="s1.p2">Alcance de esta primera versión:</p>
+            <ul>
+              <li data-i18n="s1.l1">Modelo dinámico del sistema y simulación del controlador.</li>
+              <li data-i18n="s1.l2">Sensado de ángulos y posición, etapa de potencia para el motor y placa de control.</li>
+              <li data-i18n="s1.l3">Firmware embebido con lazo de control en tiempo real.</li>
+              <li data-i18n="s1.l4">Prototipo mecánico funcional y registro de resultados.</li>
+            </ul>
+            <p class="note" data-i18n="draft">Borrador — se irá ajustando a medida que avance el proyecto.</p>
+          </div>
+        </article>
+
+        <article class="stage" id="modelado">
+          <div class="stage-head">
+            <span class="lbl">02</span>
+            <h3 data-i18n="s2.title">Modelado dinámico</h3>
+            <span class="status planned" data-i18n="st.pending">Pendiente</span>
+          </div>
+          <div class="stage-body">
+            <p data-i18n="s2.p1">Qué va a ir acá:</p>
+            <ul>
+              <li data-i18n="s2.l1">Ecuaciones de movimiento (Lagrange) del carro y los dos eslabones.</li>
+              <li data-i18n="s2.l2">Linealización alrededor del punto de equilibrio superior y modelo en espacio de estados.</li>
+              <li data-i18n="s2.l3">Simulación y diseño preliminar del controlador (LQR como punto de partida).</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="stage" id="electronica">
+          <div class="stage-head">
+            <span class="lbl">03</span>
+            <h3 data-i18n="s3.title">Electrónica</h3>
+            <span class="status planned" data-i18n="st.pending">Pendiente</span>
+          </div>
+          <div class="stage-body">
+            <p data-i18n="s3.p1">Qué va a ir acá:</p>
+            <ul>
+              <li data-i18n="s3.l1">Selección de sensores (encoders) para posición del carro y ángulos de cada eslabón.</li>
+              <li data-i18n="s3.l2">Etapa de potencia y driver del motor.</li>
+              <li data-i18n="s3.l3">Esquemático y diseño de PCB de la placa de control.</li>
+            </ul>
+            <div class="ph" role="img" aria-label="Esquemático (próximamente)" data-i18n-aria="ph.sch">
+              <div class="corner"></div>
+              <div class="ph-txt"><span class="lbl" data-i18n="ph.sch">Esquemático (próximamente)</span></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="stage" id="firmware">
+          <div class="stage-head">
+            <span class="lbl">04</span>
+            <h3 data-i18n="s4.title">Firmware</h3>
+            <span class="status planned" data-i18n="st.pending">Pendiente</span>
+          </div>
+          <div class="stage-body">
+            <p data-i18n="s4.p1">Qué va a ir acá:</p>
+            <ul>
+              <li data-i18n="s4.l1">Lectura de sensores y lazo de control a frecuencia fija.</li>
+              <li data-i18n="s4.l2">Implementación del controlador y telemetría para depurar.</li>
+              <li data-i18n="s4.l3">Fragmentos de código y enlace al repositorio.</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="stage" id="resultados">
+          <div class="stage-head">
+            <span class="lbl">05</span>
+            <h3 data-i18n="s5.title">Resultados</h3>
+            <span class="status planned" data-i18n="st.pending">Pendiente</span>
+          </div>
+          <div class="stage-body">
+            <p data-i18n="s5.p1">Qué va a ir acá: video del prototipo en equilibrio, gráficas de respuesta y lo que aprendí en el camino.</p>
+            <div class="ph" role="img" aria-label="Video / gráficas (próximamente)" data-i18n-aria="ph.res">
+              <div class="corner"></div>
+              <div class="ph-txt"><span class="lbl" data-i18n="ph.res">Video / gráficas (próximamente)</span></div>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="bitacora" aria-labelledby="log-title">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="log-title" data-i18n="log.title">Bitácora</h2>
+        <span class="lbl"><span class="on">REC</span> · <span data-i18n="log.sub">Avances del proyecto</span></span>
+      </div>
+      <ol class="log" reversed>
+        <li>
+          <time datetime="2026-10-22">2026-10-22</time>
+          <p data-i18n="log.e1">Se abre el cuaderno del proyecto. Definición de objetivo y alcance.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <span>© 2026 Gonzalo Grasso</span>
+    <span data-i18n="footer.made">Hecho a mano, alojado en GitHub Pages</span>
+  </div>
+</footer>
+
+<script>
+window.I18N = {
+  es: {
+    "meta.title": "Péndulo doble invertido — Gonzalo Grasso",
+    "meta.desc": "Diseño y construcción de un péndulo doble invertido: modelado, electrónica, firmware y resultados.",
+    "skip": "Saltar al contenido",
+    "nav.label": "Principal",
+    "lang.label": "Idioma",
+    "nav.projects": "Proyectos",
+    "nav.about": "Sobre mí",
+    "nav.contact": "Contacto",
+    "back": "Todos los proyectos",
+    "ch": "Proyecto",
+    "status": "En desarrollo",
+    "title": "Péndulo doble invertido",
+    "lede": "Un péndulo de dos eslabones montado sobre un carro, que un controlador tiene que mantener en equilibrio apuntando hacia arriba. Es un sistema inestable y subactuado: un buen banco de pruebas para juntar modelado, electrónica y firmware en un solo proyecto.",
+    "meta.status": "Estado",
+    "meta.status.v": "En desarrollo · etapa 1 de 5",
+    "meta.start": "Inicio",
+    "meta.areas": "Áreas",
+    "meta.repo": "Repositorio",
+    "meta.repo.v": "Próximamente",
+    "ph": "Imagen del proyecto (próximamente)",
+    "ph.sch": "Esquemático (próximamente)",
+    "ph.res": "Video / gráficas (próximamente)",
+    "stages.title": "Etapas",
+    "stages.count": "5 etapas · 1 en curso",
+    "st.active": "En curso",
+    "st.pending": "Pendiente",
+    "st.done": "Listo",
+    "draft": "Borrador — se irá ajustando a medida que avance el proyecto.",
+    "s1.title": "Objetivo y alcance",
+    "s1.p1": "El objetivo es <strong>levantar y mantener en equilibrio</strong> un péndulo doble invertido sobre un carro lineal, con electrónica y firmware propios.",
+    "s1.p2": "Alcance de esta primera versión:",
+    "s1.l1": "Modelo dinámico del sistema y simulación del controlador.",
+    "s1.l2": "Sensado de ángulos y posición, etapa de potencia para el motor y placa de control.",
+    "s1.l3": "Firmware embebido con lazo de control en tiempo real.",
+    "s1.l4": "Prototipo mecánico funcional y registro de resultados.",
+    "s2.title": "Modelado dinámico",
+    "s2.p1": "Qué va a ir acá:",
+    "s2.l1": "Ecuaciones de movimiento (Lagrange) del carro y los dos eslabones.",
+    "s2.l2": "Linealización alrededor del punto de equilibrio superior y modelo en espacio de estados.",
+    "s2.l3": "Simulación y diseño preliminar del controlador (LQR como punto de partida).",
+    "s3.title": "Electrónica",
+    "s3.p1": "Qué va a ir acá:",
+    "s3.l1": "Selección de sensores (encoders) para posición del carro y ángulos de cada eslabón.",
+    "s3.l2": "Etapa de potencia y driver del motor.",
+    "s3.l3": "Esquemático y diseño de PCB de la placa de control.",
+    "s4.title": "Firmware",
+    "s4.p1": "Qué va a ir acá:",
+    "s4.l1": "Lectura de sensores y lazo de control a frecuencia fija.",
+    "s4.l2": "Implementación del controlador y telemetría para depurar.",
+    "s4.l3": "Fragmentos de código y enlace al repositorio.",
+    "s5.title": "Resultados",
+    "s5.p1": "Qué va a ir acá: video del prototipo en equilibrio, gráficas de respuesta y lo que aprendí en el camino.",
+    "log.title": "Bitácora",
+    "log.sub": "Avances del proyecto",
+    "log.e1": "Se abre el cuaderno del proyecto. Definición de objetivo y alcance.",
+    "footer.made": "Hecho a mano, alojado en GitHub Pages"
+  },
+  en: {
+    "meta.title": "Double inverted pendulum — Gonzalo Grasso",
+    "meta.desc": "Design and build of a double inverted pendulum: modelling, electronics, firmware and results.",
+    "skip": "Skip to content",
+    "nav.label": "Main",
+    "lang.label": "Language",
+    "nav.projects": "Projects",
+    "nav.about": "About",
+    "nav.contact": "Contact",
+    "back": "All projects",
+    "ch": "Project",
+    "status": "In progress",
+    "title": "Double inverted pendulum",
+    "lede": "A two-link pendulum mounted on a cart that a controller has to keep balanced pointing upwards. It is an unstable, underactuated system: a good test bench for bringing modelling, electronics and firmware together in a single project.",
+    "meta.status": "Status",
+    "meta.status.v": "In progress · stage 1 of 5",
+    "meta.start": "Started",
+    "meta.areas": "Areas",
+    "meta.repo": "Repository",
+    "meta.repo.v": "Coming soon",
+    "ph": "Project image (coming soon)",
+    "ph.sch": "Schematic (coming soon)",
+    "ph.res": "Video / plots (coming soon)",
+    "stages.title": "Stages",
+    "stages.count": "5 stages · 1 active",
+    "st.active": "Active",
+    "st.pending": "Pending",
+    "st.done": "Done",
+    "draft": "Draft — will be refined as the project moves forward.",
+    "s1.title": "Goal and scope",
+    "s1.p1": "The goal is to <strong>swing up and balance</strong> a double inverted pendulum on a linear cart, with my own electronics and firmware.",
+    "s1.p2": "Scope of this first version:",
+    "s1.l1": "Dynamic model of the system and controller simulation.",
+    "s1.l2": "Angle and position sensing, motor power stage and control board.",
+    "s1.l3": "Embedded firmware with a real-time control loop.",
+    "s1.l4": "Working mechanical prototype and recorded results.",
+    "s2.title": "Dynamic modelling",
+    "s2.p1": "What will go here:",
+    "s2.l1": "Equations of motion (Lagrange) for the cart and the two links.",
+    "s2.l2": "Linearisation around the upright equilibrium and state-space model.",
+    "s2.l3": "Simulation and preliminary controller design (LQR as a starting point).",
+    "s3.title": "Electronics",
+    "s3.p1": "What will go here:",
+    "s3.l1": "Sensor selection (encoders) for cart position and each link angle.",
+    "s3.l2": "Power stage and motor driver.",
+    "s3.l3": "Schematic and PCB design of the control board.",
+    "s4.title": "Firmware",
+    "s4.p1": "What will go here:",
+    "s4.l1": "Sensor reading and fixed-rate control loop.",
+    "s4.l2": "Controller implementation and telemetry for debugging.",
+    "s4.l3": "Code snippets and link to the repository.",
+    "s5.title": "Results",
+    "s5.p1": "What will go here: video of the prototype balancing, response plots and what I learned along the way.",
+    "log.title": "Log",
+    "log.sub": "Project progress",
+    "log.e1": "Project notebook opened. Goal and scope defined.",
+    "footer.made": "Hand-built, hosted on GitHub Pages"
+  }
+};
+</script>
+<script src="../../assets/js/i18n.js"></script>
+</body>
+</html>
